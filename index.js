@@ -1,27 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+require('dotenv').config()
+
+const {initDb} = require('./database/initdb')
+const postRouter = require('./views/post')
+
 const app = express();
-const PORT = 6000;
+const PORT = process.env.PORT || 6000;
 
 app.use(bodyParser.json());
 
-const route = {
-  getAllPosts: (req, res) => {
-    res.send('Get all posts');
-  },
-  getPostById: (req, res) => {
-    res.send(`Get post with ID: ${req.params.postid}`);
-  },
-  createPost: (req, res) => {
-    res.send('Create a new post');
-  }
-};
-
-app.get('/', route.getAllPosts);
-app.get('/:postid', route.getPostById);
-app.post('/', route.createPost);
+app.use('/', postRouter)
 
 app.listen(PORT, () => {
+  initDb()
   console.log(`Server is running on http://localhost:${PORT}`);
 });

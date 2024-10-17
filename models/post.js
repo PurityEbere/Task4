@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./blog.db');
+const db = new sqlite3.Database('./database/blog.db');
 
 const getAllPosts = (callback) => {
   const sql = 'SELECT * FROM posts';
@@ -9,7 +9,6 @@ const getAllPosts = (callback) => {
   });
 };
 
-
 const getPostById = (id, callback) => {
   const sql = 'SELECT * FROM posts WHERE id = ?';
   db.get(sql, [id], (err, row) => {
@@ -17,7 +16,6 @@ const getPostById = (id, callback) => {
     return callback(null, row);
   });
 };
-
 
 const createPost = (title, content, callback) => {
   const sql = 'INSERT INTO posts (title, content) VALUES (?, ?)';

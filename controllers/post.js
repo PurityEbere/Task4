@@ -6,12 +6,6 @@ const getAllPosts = (req, res) => {
     res.json(posts);
   });
 };
-// const getAllposts = (req, res) => {
-//   postModel.getAllPosts((err, posts) => {
-//     if (err) return res.status(500).json({ error: err.message });
-//     res.json(posts)
-//   })
-// }
 
 const getPostById = (req, res) => {
   const { postid } = req.params;
